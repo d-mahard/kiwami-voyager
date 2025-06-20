@@ -13,6 +13,7 @@ enum custom_keycodes {
   ST_MACRO_5,
   ST_MACRO_6,
   ST_MACRO_7,
+  KC_COMM_CIRC,
 };
 
 
@@ -224,8 +225,50 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         rgblight_mode(1);
       }
       return false;
-  }
+    case KC_COMM_CIRC:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_CIRC) SS_DELAY(100) SS_TAP(X_SPACE));
+      }
+      return false;
+    }
   return true;
 }
 
 
+
+
+// Custom QMK here
+const key_override_t paren_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_LPRN, KC_RPRN);
+const key_override_t brace_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_LCBR, KC_RCBR);
+const key_override_t slash_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_SLSH, KC_BSLS);
+const key_override_t hash_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_HASH, KC_ASTR);
+const key_override_t at_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_AT, KC_PERC);
+const key_override_t colon_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_SCLN);
+const key_override_t xclam_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_EXLM, KC_LBRC);
+const key_override_t quest_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_QUES, KC_RBRC);
+const key_override_t comma_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_COMM_CIRC);
+const key_override_t dot_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_DLR);
+
+const key_override_t **key_overrides = (const key_override_t *[]){
+	&paren_key_override,
+  &brace_key_override,
+  &slash_key_override,
+  &hash_key_override,
+  &at_key_override,
+  &colon_key_override,
+  &xclam_key_override,
+  &quest_key_override,
+  &comma_key_override,
+  &dot_key_override,
+	NULL
+};
