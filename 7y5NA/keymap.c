@@ -227,7 +227,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     case KC_COMM_CIRC:
       if (record->event.pressed) {
-        SEND_STRING(SS_TAP(X_CIRC) SS_DELAY(100) SS_TAP(X_SPACE));
+        SEND_STRING(S_LSFT(SS_TAP(X_6))SS_DELAY(100) SS_TAP(X_SPACE));
       }
       return false;
     }
