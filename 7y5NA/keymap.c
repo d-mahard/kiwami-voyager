@@ -13,7 +13,6 @@ enum custom_keycodes {
   ST_MACRO_5,
   ST_MACRO_6,
   ST_MACRO_7,
-  KC_COMM_CIRC,
 };
 
 
@@ -225,12 +224,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         rgblight_mode(1);
       }
       return false;
-    case KC_COMM_CIRC:
-      if (record->event.pressed) {
-        tap_code(KC_6);
-        tap_code(KC_SPACE);
-      }
-      return false;
     }
   return true;
 }
@@ -256,7 +249,7 @@ const key_override_t xclam_key_override =
 const key_override_t quest_key_override = 
     ko_make_basic(MOD_MASK_SHIFT, KC_QUES, KC_RBRC);
 const key_override_t comma_key_override = 
-    ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_COMM_CIRC);
+    ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_CIRC);
 const key_override_t dot_key_override = 
     ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_DLR);
 
