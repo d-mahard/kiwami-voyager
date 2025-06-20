@@ -17,8 +17,8 @@ enum custom_keycodes {
 
 
 
-#define DUAL_FUNC_0 LT(5, KC_F14)
-#define DUAL_FUNC_1 LT(7, KC_I)
+#define DUAL_FUNC_0 LT(14, KC_Y)
+#define DUAL_FUNC_1 LT(5, KC_R)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
