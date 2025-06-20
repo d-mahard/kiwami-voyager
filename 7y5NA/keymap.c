@@ -17,8 +17,8 @@ enum custom_keycodes {
 
 
 
-#define DUAL_FUNC_0 LT(14, KC_Y)
-#define DUAL_FUNC_1 LT(5, KC_R)
+#define DUAL_FUNC_0 LT(8, KC_L)
+#define DUAL_FUNC_1 LT(7, KC_F13)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
@@ -26,7 +26,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     OSM(MOD_LGUI),  KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                                           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           OSM(MOD_LALT),  
     DUAL_FUNC_0,    KC_A,           KC_S,           KC_D,           KC_F,           KC_G,                                           KC_H,           KC_J,           KC_K,           KC_L,           KC_EXLM,        OSL(2),         
     MT(MOD_LALT, KC_DELETE),KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_QUES,        KC_BSPC,        
-                                                    OSM(MOD_LSFT),  DUAL_FUNC_1,                                    LT(1, KC_SPACE),OSL(3)
+                                                    DUAL_FUNC_1,    OSM(MOD_LSFT),                                  OSL(3),         LT(1, KC_SPACE)
   ),
   [1] = LAYOUT_voyager(
     TO(0),          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NUM,                                         QK_LLCK,        KC_7,           KC_8,           KC_9,           KC_KP_PLUS,     KC_TRANSPARENT, 
@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, LALT(KC_LEFT),  LALT(KC_DOWN),  LALT(KC_UP),    LALT(KC_RIGHT), LALT(KC_RBRC),                                  KC_PAGE_UP,     LCTL(KC_LEFT),  LCTL(KC_UP),    LCTL(KC_DOWN),  LCTL(KC_RIGHT), LCTL(KC_PAGE_UP),
     KC_TRANSPARENT, LALT(LCTL(KC_LEFT)),LALT(LCTL(KC_DOWN)),LALT(LCTL(KC_UP)),LALT(LCTL(KC_RIGHT)),LALT(KC_LBRC),                                  KC_PGDN,        KC_LEFT,        KC_UP,          KC_DOWN,        KC_RIGHT,       LCTL(KC_PGDN),  
     KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_HOME,                                        KC_END,         KC_NO,          KC_NO,          KC_NO,          KC_LEFT_ALT,    KC_TRANSPARENT, 
-                                                    KC_TRANSPARENT, TO(0),                                          KC_TRANSPARENT, MO(5)
+                                                    TO(0),          KC_TRANSPARENT,                                 MO(5),          KC_TRANSPARENT
   ),
   [5] = LAYOUT_voyager(
     TO(0),          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_ENTER,       
@@ -82,7 +82,7 @@ void keyboard_post_init_user(void) {
 }
 
 const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
-    [0] = { {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {51,255,255}, {51,255,255}, {51,255,255}, {51,255,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {51,255,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {51,255,255}, {51,255,255}, {51,255,255}, {51,255,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {51,255,255}, {0,0,255} },
+    [0] = { {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {51,255,255}, {51,255,255}, {51,255,255}, {51,255,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {51,255,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {51,255,255}, {51,255,255}, {51,255,255}, {51,255,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {0,0,255}, {51,255,255} },
 
     [1] = { {43,255,255}, {129,255,255}, {0,0,0}, {0,0,0}, {129,255,255}, {193,255,255}, {43,255,255}, {10,255,255}, {10,255,255}, {10,255,255}, {10,255,255}, {10,255,255}, {43,255,255}, {10,255,255}, {10,255,255}, {10,255,255}, {10,255,255}, {0,255,255}, {43,255,255}, {129,255,255}, {129,255,255}, {129,255,255}, {0,0,255}, {0,0,255}, {43,255,255}, {43,255,255}, {193,255,255}, {10,255,255}, {10,255,255}, {10,255,255}, {129,255,255}, {43,255,255}, {161,255,255}, {10,255,255}, {10,255,255}, {10,255,255}, {129,255,255}, {43,255,255}, {0,0,255}, {10,255,255}, {10,255,255}, {10,255,255}, {129,255,255}, {84,255,255}, {0,0,255}, {0,0,255}, {0,255,255}, {0,0,255}, {129,255,255}, {43,255,255}, {0,0,0}, {43,255,255} },
 
