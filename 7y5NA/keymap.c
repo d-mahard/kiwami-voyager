@@ -155,10 +155,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     break;
     case ST_MACRO_1:
-    if (record->event.pressed) {
-      SEND_STRING(SS_TAP(X_COMMA)SS_DELAY(100)  SS_TAP(X_SPACE));
-    }
-    break;
+        if (record->event.pressed) {
+          tap_code(KC_COMMA);
+          tap_code(KC_SPACE);
     case ST_MACRO_2:
     if (record->event.pressed) {
       SEND_STRING(SS_TAP(X_GRAVE)SS_DELAY(100)  SS_TAP(X_SPACE));
@@ -254,6 +253,8 @@ const key_override_t xclam_key_override =
     ko_make_basic(MOD_MASK_SHIFT, KC_EXLM, KC_LBRC);
 const key_override_t quest_key_override = 
     ko_make_basic(MOD_MASK_SHIFT, KC_QUES, KC_RBRC);
+const key_override_t comma_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_NO);
 const key_override_t dot_key_override = 
     ko_make_basic(MOD_MASK_SHIFT, KC_DOT, RALT(KC_5));
 
@@ -266,6 +267,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
   &colon_key_override,
   &xclam_key_override,
   &quest_key_override,
+  &comma_key_override,
   &dot_key_override,
 	NULL
 };
