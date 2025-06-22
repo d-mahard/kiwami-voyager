@@ -11,16 +11,12 @@ enum custom_keycodes {
   ST_MACRO_3,
   ST_MACRO_4,
   ST_MACRO_5,
-  ST_MACRO_6,
-  ST_MACRO_7,
-  ST_MACRO_8,
-  ST_MACRO_9,
 };
 
 
 
-#define DUAL_FUNC_0 LT(12, KC_T)
-#define DUAL_FUNC_1 LT(7, KC_A)
+#define DUAL_FUNC_0 LT(8, KC_O)
+#define DUAL_FUNC_1 LT(5, KC_U)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
@@ -46,9 +42,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [3] = LAYOUT_voyager(
     KC_TRANSPARENT, ST_MACRO_2,     ST_MACRO_3,     KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_PIPE,        KC_PLUS,        KC_AMPR,        KC_NO,          KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_NO,          KC_NO,          ST_MACRO_4,     KC_NO,          KC_NO,                                          ST_MACRO_6,     ST_MACRO_7,     KC_NO,          ST_MACRO_8,     RALT(KC_S),     KC_TRANSPARENT, 
-    KC_TRANSPARENT, ST_MACRO_5,     RALT(KC_S),     KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          RALT(KC_L),     KC_LABK,        KC_NO,          
-    KC_TRANSPARENT, RALT(KC_Z),     KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          ST_MACRO_9,     KC_DLR,         KC_RABK,        KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_NO,          KC_NO,          RALT(KC_E),     KC_NO,          KC_NO,                                          ST_MACRO_4,     RALT(KC_Y),     KC_NO,          RALT(KC_P),     RALT(RSFT(KC_S)),KC_TRANSPARENT, 
+    KC_TRANSPARENT, RALT(KC_Q),     RALT(KC_S),     KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          RALT(KC_L),     KC_LABK,        KC_NO,          
+    KC_TRANSPARENT, RALT(KC_Z),     KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          ST_MACRO_5,     KC_DLR,         KC_RABK,        KC_TRANSPARENT, 
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [4] = LAYOUT_voyager(
@@ -170,30 +166,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     break;
     case ST_MACRO_4:
     if (record->event.pressed) {
-      SEND_STRING(SS_TAP(X_QUOTE)SS_DELAY(100)  SS_TAP(X_E));
-    }
-    break;
-    case ST_MACRO_5:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_QUOTE))SS_DELAY(100)  SS_TAP(X_A));
-    }
-    break;
-    case ST_MACRO_6:
-    if (record->event.pressed) {
       SEND_STRING(SS_RALT(SS_TAP(X_MINUS)));
     }
     break;
-    case ST_MACRO_7:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_QUOTE))SS_DELAY(100)  SS_TAP(X_U));
-    }
-    break;
-    case ST_MACRO_8:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_QUOTE))SS_DELAY(100)  SS_TAP(X_O));
-    }
-    break;
-    case ST_MACRO_9:
+    case ST_MACRO_5:
     if (record->event.pressed) {
       SEND_STRING(SS_LSFT(SS_TAP(X_6))SS_DELAY(100)  SS_TAP(X_SPACE));
     }
