@@ -18,8 +18,8 @@ enum custom_keycodes {
 
 
 
-#define DUAL_FUNC_0 LT(14, KC_9)
-#define DUAL_FUNC_1 LT(13, KC_F24)
+#define DUAL_FUNC_0 LT(8, KC_F24)
+#define DUAL_FUNC_1 LT(3, KC_O)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
@@ -45,9 +45,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [3] = LAYOUT_voyager(
     KC_TRANSPARENT, ST_MACRO_2,     ST_MACRO_3,     KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_PIPE,        KC_PLUS,        KC_AMPR,        KC_NO,          KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_NO,          KC_NO,          ST_MACRO_4,     KC_NO,          KC_NO,                                          KC_NO,          ST_MACRO_6,     KC_NO,          ST_MACRO_7,     RALT(KC_S),     KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_NO,          KC_NO,          ST_MACRO_4,     KC_NO,          KC_NO,                                          ST_MACRO_6,     ST_MACRO_7,     KC_NO,          ST_MACRO_8,     RALT(KC_S),     KC_TRANSPARENT, 
     KC_TRANSPARENT, ST_MACRO_5,     RALT(KC_S),     KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          RALT(KC_L),     KC_LABK,        KC_NO,          
-    KC_TRANSPARENT, RALT(KC_Z),     KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          ST_MACRO_8,     RALT(KC_5),     KC_RABK,        KC_TRANSPARENT, 
+    KC_TRANSPARENT, RALT(KC_Z),     KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_CIRC,        KC_DLR,         KC_RABK,        KC_TRANSPARENT, 
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [4] = LAYOUT_voyager(
@@ -181,17 +181,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     break;
     case ST_MACRO_6:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_QUOTE))SS_DELAY(100)  SS_TAP(X_U));
+      SEND_STRING(SS_RALT(SS_TAP(X_MINUS)));
     }
     break;
     case ST_MACRO_7:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_QUOTE))SS_DELAY(100)  SS_TAP(X_O));
+      SEND_STRING(SS_LSFT(SS_TAP(X_QUOTE))SS_DELAY(100)  SS_TAP(X_U));
     }
     break;
     case ST_MACRO_8:
     if (record->event.pressed) {
-      SEND_STRING(SS_RALT(SS_TAP(X_MINUS)));
+      SEND_STRING(SS_LSFT(SS_TAP(X_QUOTE))SS_DELAY(100)  SS_TAP(X_O));
     }
     break;
 
