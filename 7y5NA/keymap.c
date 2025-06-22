@@ -255,9 +255,9 @@ const key_override_t xclam_key_override =
 const key_override_t quest_key_override = 
     ko_make_basic(MOD_MASK_SHIFT, KC_QUES, KC_RBRC);
 const key_override_t comma_key_override = 
-    ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_CIRC);
+    ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_NO);
 const key_override_t dot_key_override = 
-    ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_DLR);
+    ko_make_basic(MOD_MASK_SHIFT, KC_DOT, RALT(KC_5));
 
 const key_override_t **key_overrides = (const key_override_t *[]){
 	&paren_key_override,
