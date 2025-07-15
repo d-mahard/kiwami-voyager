@@ -9,6 +9,3 @@
 
 
 #define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
-
-#pragma once
-void set_modifier_indicators(void);

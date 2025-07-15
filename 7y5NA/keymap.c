@@ -148,6 +148,9 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
 
 };
 
+void set_modifier_indicators(void);
+
+
 void set_layer_color(int layer) {
   for (int i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
     HSV hsv = {
