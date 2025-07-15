@@ -170,6 +170,8 @@ bool rgb_matrix_indicators_user(void) {
       return false;
   }
   if (keyboard_config.disable_layer_led) { return false; }
+  
+  // Set base layer colors first
   switch (biton32(layer_state)) {
     case 0:
       set_layer_color(0);
@@ -197,6 +199,11 @@ bool rgb_matrix_indicators_user(void) {
       rgb_matrix_set_color_all(0, 0, 0);
     break;
   }
+  
+  // Apply modifier indicators on top of layer colors
+  // This ensures mod indicators are visible regardless of current layer
+  set_modifier_indicators();
+  
   return true;
 }
 
@@ -279,3 +286,61 @@ const key_override_t **key_overrides = (const key_override_t *[]){
   &colon_key_override,
 	NULL
 };
+
+// Modifier LED indicator configuration
+// LED positions for modifier indicators (based on physical key locations)
+#define LED_GUI_POS     6   // Left GUI key position (matrix [1,1])
+#define LED_CTRL_POS    25  // Left Ctrl key position (matrix [5,1])
+#define LED_ALT_POS     37  // Right Alt key position (matrix [7,5])
+#define LED_ALT_LEFT_POS 18 // Left Alt key position (matrix [3,1]) - MT(MOD_LALT, KC_DELETE)
+#define LED_SHIFT_POS   50  // Right Shift key position (matrix [11,5])
+
+// Modifier indicator color (bright white)
+#define MOD_INDICATOR_COLOR_R 255
+#define MOD_INDICATOR_COLOR_G 255
+#define MOD_INDICATOR_COLOR_B 255
+
+/**
+ * Check if any modifier keys are currently active
+ * Returns true if any of Shift, Ctrl, Alt, or GUI are pressed
+ */
+bool is_any_modifier_active(void) {
+    uint8_t mods = get_mods();
+    uint8_t oneshot_mods = get_oneshot_mods();
+    
+    // Check for any modifier bits (Shift, Ctrl, Alt, GUI)
+    return (mods & (MOD_MASK_SHIFT | MOD_MASK_CTRL | MOD_MASK_ALT | MOD_MASK_GUI)) ||
+           (oneshot_mods & (MOD_MASK_SHIFT | MOD_MASK_CTRL | MOD_MASK_ALT | MOD_MASK_GUI));
+}
+
+/**
+ * Set modifier indicator LEDs based on active modifiers
+ * This function overrides specific LED colors when modifiers are active
+ */
+void set_modifier_indicators(void) {
+    if (!is_any_modifier_active()) {
+        return; // No modifiers active, let layer colors show
+    }
+    
+    uint8_t mods = get_mods();
+    uint8_t oneshot_mods = get_oneshot_mods();
+    
+    // Set indicator LEDs for active modifiers
+    if ((mods | oneshot_mods) & MOD_MASK_GUI) {
+        rgb_matrix_set_color(LED_GUI_POS, MOD_INDICATOR_COLOR_R, MOD_INDICATOR_COLOR_G, MOD_INDICATOR_COLOR_B);
+    }
+    
+    if ((mods | oneshot_mods) & MOD_MASK_CTRL) {
+        rgb_matrix_set_color(LED_CTRL_POS, MOD_INDICATOR_COLOR_R, MOD_INDICATOR_COLOR_G, MOD_INDICATOR_COLOR_B);
+    }
+    
+    if ((mods | oneshot_mods) & MOD_MASK_ALT) {
+        // Light up both Alt key positions (left and right)
+        rgb_matrix_set_color(LED_ALT_POS, MOD_INDICATOR_COLOR_R, MOD_INDICATOR_COLOR_G, MOD_INDICATOR_COLOR_B);
+        rgb_matrix_set_color(LED_ALT_LEFT_POS, MOD_INDICATOR_COLOR_R, MOD_INDICATOR_COLOR_G, MOD_INDICATOR_COLOR_B);
+    }
+    
+    if ((mods | oneshot_mods) & MOD_MASK_SHIFT) {
+        rgb_matrix_set_color(LED_SHIFT_POS, MOD_INDICATOR_COLOR_R, MOD_INDICATOR_COLOR_G, MOD_INDICATOR_COLOR_B);
+    }
+}

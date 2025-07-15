@@ -4,6 +4,24 @@ This repository allows combining the convenience of [Oryx’s](https://www.zsa.i
 
 For a detailed guide, check out the full [blog post here](https://blog.zsa.io/oryx-custom-qmk-features).
 
+## Custom Features
+
+### Modifier LED Indicators
+
+The keymap includes a custom modifier LED indicator system that provides visual feedback when modifier keys are active:
+
+- **Supported Modifiers**: Shift, Ctrl, Alt, and GUI (Windows/Cmd key)
+- **Visual Feedback**: When any modifier is pressed or held, specific LEDs light up in bright white to indicate their status
+- **Key Positions**: 
+  - GUI: Left GUI key position (LED 6)
+  - Ctrl: Left Ctrl key position (LED 25)
+  - Alt: Both Alt key positions (LEDs 18 and 37)
+  - Shift: Right Shift key position (LED 50)
+- **Layer Compatibility**: Works across all layers and is not overwritten by layer changes
+- **One-Shot Mod Support**: Fully compatible with one-shot modifiers (OSM) and mod-tap keys (MT)
+
+The indicator responds immediately to modifier state changes and coexists with the existing per-layer RGB lighting system.
+
 ## How it works
 
 Each time you run the GitHub Action, the workflow will:
