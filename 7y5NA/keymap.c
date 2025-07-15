@@ -202,6 +202,7 @@ bool rgb_matrix_indicators_user(void) {
   
   // Apply modifier indicators on top of layer colors
   // This ensures mod indicators are visible regardless of current layer
+  // and take precedence over layer-specific LED colors
   set_modifier_indicators();
   
   return true;
@@ -295,14 +296,15 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 #define LED_ALT_LEFT_POS 18 // Left Alt key position (matrix [3,1]) - MT(MOD_LALT, KC_DELETE)
 #define LED_SHIFT_POS   50  // Right Shift key position (matrix [11,5])
 
-// Modifier indicator color (bright white)
+// Modifier indicator color (bright magenta) - Change these values to customize the color
 #define MOD_INDICATOR_COLOR_R 255
-#define MOD_INDICATOR_COLOR_G 255
+#define MOD_INDICATOR_COLOR_G 0
 #define MOD_INDICATOR_COLOR_B 255
 
 /**
  * Check if any modifier keys are currently active
  * Returns true if any of Shift, Ctrl, Alt, or GUI are pressed
+ * Supports both regular modifiers and one-shot modifiers (OSM)
  */
 bool is_any_modifier_active(void) {
     uint8_t mods = get_mods();
@@ -316,6 +318,7 @@ bool is_any_modifier_active(void) {
 /**
  * Set modifier indicator LEDs based on active modifiers
  * This function overrides specific LED colors when modifiers are active
+ * Called after layer colors are set to ensure mod indicators are visible
  */
 void set_modifier_indicators(void) {
     if (!is_any_modifier_active()) {
