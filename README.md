@@ -11,12 +11,12 @@ For a detailed guide, check out the full [blog post here](https://blog.zsa.io/or
 The keymap includes a custom modifier LED indicator system that provides visual feedback when modifier keys are active:
 
 - **Supported Modifiers**: Shift, Ctrl, Alt, and GUI (Windows/Cmd key)
-- **Visual Feedback**: When any modifier is pressed or held, specific LEDs light up in bright magenta to indicate their status
+- **Visual Feedback**: When any modifier is pressed or held, specific LEDs light up in red to indicate their status
 - **Key Positions**: 
-  - GUI: Left GUI key position (LED 6)
-  - Ctrl: Left Ctrl key position (LED 25)
-  - Alt: Both Alt key positions (LEDs 18 and 37)
-  - Shift: Right Shift key position (LED 50)
+  - GUI: Win/Meta key position (LED 6)
+  - Ctrl: Ctrl key position (LED 25)
+  - Alt: Alt key position (LED 37)
+  - Shift: Shift key position (LED 50)
 - **Layer Compatibility**: Works across all layers and is not overwritten by layer changes
 - **One-Shot Mod Support**: Fully compatible with one-shot modifiers (OSM) and mod-tap keys (MT)
 

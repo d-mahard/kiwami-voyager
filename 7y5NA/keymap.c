@@ -290,16 +290,15 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 
 // Modifier LED indicator configuration
 // LED positions for modifier indicators (based on physical key locations)
-#define LED_GUI_POS     6   // Left GUI key position (matrix [1,1])
-#define LED_CTRL_POS    25  // Left Ctrl key position (matrix [5,1])
-#define LED_ALT_POS     37  // Right Alt key position (matrix [7,5])
-#define LED_ALT_LEFT_POS 18 // Left Alt key position (matrix [3,1]) - MT(MOD_LALT, KC_DELETE)
-#define LED_SHIFT_POS   50  // Right Shift key position (matrix [11,5])
+#define LED_GUI_POS     6   // Win/Meta key position
+#define LED_CTRL_POS    25  // Ctrl key position
+#define LED_ALT_POS     37  // Alt key position
+#define LED_SHIFT_POS   50  // Shift key position
 
-// Modifier indicator color (bright magenta) - Change these values to customize the color
+// Modifier indicator color (red) - Change these values to customize the color
 #define MOD_INDICATOR_COLOR_R 255
 #define MOD_INDICATOR_COLOR_G 0
-#define MOD_INDICATOR_COLOR_B 255
+#define MOD_INDICATOR_COLOR_B 0
 
 /**
  * Check if any modifier keys are currently active
@@ -338,9 +337,8 @@ void set_modifier_indicators(void) {
     }
     
     if ((mods | oneshot_mods) & MOD_MASK_ALT) {
-        // Light up both Alt key positions (left and right)
+        // Light up Alt key position (right side only)
         rgb_matrix_set_color(LED_ALT_POS, MOD_INDICATOR_COLOR_R, MOD_INDICATOR_COLOR_G, MOD_INDICATOR_COLOR_B);
-        rgb_matrix_set_color(LED_ALT_LEFT_POS, MOD_INDICATOR_COLOR_R, MOD_INDICATOR_COLOR_G, MOD_INDICATOR_COLOR_B);
     }
     
     if ((mods | oneshot_mods) & MOD_MASK_SHIFT) {
