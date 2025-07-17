@@ -272,11 +272,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     case PRINT_RGB_COLOR:
       if (record->event.pressed) {
-        // Only print if RGB matrix is enabled and not animated
-        if (rgb_matrix_config.enable && rgb_matrix_get_mode() == 1) {
-          uint8_t h = rgb_matrix_config.hsv.h;
-          uint8_t s = rgb_matrix_config.hsv.s;
-          uint8_t v = rgb_matrix_config.hsv.v;
+        // Only print if RGB lighting is enabled and in static mode
+        if (rgblight_is_enabled() && rgblight_get_mode() == RGBLIGHT_MODE_STATIC_LIGHT) {
+          uint8_t h = rgblight_get_hue();
+          uint8_t s = rgblight_get_sat();
+          uint8_t v = rgblight_get_val();
           char buf[32];
           snprintf(buf, sizeof(buf), "HSV(%d, %d, %d)", h, s, v);
           send_string(buf);
