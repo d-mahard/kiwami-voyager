@@ -305,16 +305,17 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 
 /**
  * Check if any modifier keys are currently active
- * Returns true if any of Shift, Ctrl, Alt, or GUI are pressed
+ * Returns true if any of Shift, Ctrl, Alt, GUI are pressed, or CAPS WORD is active
  * Supports both regular modifiers and one-shot modifiers (OSM)
  */
 bool is_any_modifier_active(void) {
     uint8_t mods = get_mods();
     uint8_t oneshot_mods = get_oneshot_mods();
     
-    // Check for any modifier bits (Shift, Ctrl, Alt, GUI)
+    // Check for any modifier bits (Shift, Ctrl, Alt, GUI) or CAPS WORD
     return (mods & (MOD_MASK_SHIFT | MOD_MASK_CTRL | MOD_MASK_ALT | MOD_MASK_GUI)) ||
-           (oneshot_mods & (MOD_MASK_SHIFT | MOD_MASK_CTRL | MOD_MASK_ALT | MOD_MASK_GUI));
+           (oneshot_mods & (MOD_MASK_SHIFT | MOD_MASK_CTRL | MOD_MASK_ALT | MOD_MASK_GUI)) ||
+           is_caps_word_on();
 }
 
 /**
@@ -344,7 +345,7 @@ void set_modifier_indicators(void) {
         rgb_matrix_set_color(LED_ALT_POS, MOD_INDICATOR_COLOR_R, MOD_INDICATOR_COLOR_G, MOD_INDICATOR_COLOR_B);
     }
     
-    if ((mods | oneshot_mods) & MOD_MASK_SHIFT) {
+    if ((mods | oneshot_mods) & MOD_MASK_SHIFT || is_caps_word_on()) {
         rgb_matrix_set_color(LED_SHIFT_POS, MOD_INDICATOR_COLOR_R, MOD_INDICATOR_COLOR_G, MOD_INDICATOR_COLOR_B);
     }
 }
