@@ -12,7 +12,8 @@ enum custom_keycodes {
   ST_MACRO_2,
   ST_MACRO_3,
   ST_MACRO_4,
-  CLEAR_MODS, 
+  CLEAR_MODS,
+  PRINT_RGB_COLOR, // New keycode for printing current RGB/HSV color
 };
 
 
@@ -37,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [2] = LAYOUT_voyager(
     TO(0),          KC_MEDIA_PREV_TRACK,KC_MEDIA_STOP,  KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,KC_SYSTEM_SLEEP,                                QK_LLCK,        RGB_MODE_FORWARD,TOGGLE_LAYER_COLOR,RGB_SLD,        RGB_TOG,        KC_AUDIO_MUTE,  
     KC_BRIGHTNESS_UP,KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_INSERT,                                      KC_APPLICATION, RGB_SPI,        RGB_HUI,        RGB_SAI,        RGB_VAI,        KC_AUDIO_VOL_UP,
-    KC_BRIGHTNESS_DOWN,KC_F5,          KC_F6,          KC_F7,          KC_F8,          KC_PSCR,                                        KC_NO,          RGB_SPD,        RGB_HUD,        RGB_SAD,        RGB_VAD,        KC_AUDIO_VOL_DOWN,
+    KC_BRIGHTNESS_DOWN,KC_F5,          KC_F6,          KC_F7,          KC_F8,          KC_PSCR,                                        PRINT_RGB_COLOR, RGB_SPD,        RGB_HUD,        RGB_SAD,        RGB_VAD,        KC_AUDIO_VOL_DOWN,
     OSM(MOD_LALT),  KC_F9,          KC_F10,         KC_F11,         KC_F12,         LGUI(LSFT(KC_S)),                                QK_BOOT,        EE_CLR,         QK_DYNAMIC_TAPPING_TERM_UP,QK_DYNAMIC_TAPPING_TERM_DOWN,QK_DYNAMIC_TAPPING_TERM_PRINT,KC_NO,          
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_NO
   ),
@@ -267,6 +268,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case RGB_SLD:
       if (record->event.pressed) {
         rgblight_mode(1);
+      }
+      return false;
+    case PRINT_RGB_COLOR:
+      if (record->event.pressed) {
+        // Only print if RGB matrix is enabled and not animated
+        if (rgb_matrix_config.enable && rgb_matrix_get_mode() == 1) {
+          uint8_t h = rgb_matrix_config.hsv.h;
+          uint8_t s = rgb_matrix_config.hsv.s;
+          uint8_t v = rgb_matrix_config.hsv.v;
+          char buf[32];
+          snprintf(buf, sizeof(buf), "HSV(%d, %d, %d)", h, s, v);
+          send_string(buf);
+        }
       }
       return false;
     }
