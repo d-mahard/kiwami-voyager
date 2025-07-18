@@ -275,7 +275,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         // Only print if RGB Matrix is enabled
         if (rgb_matrix_is_enabled()) {
-          hsv_t hsv = rgb_matrix_get_hsv();
+          HSV hsv = rgb_matrix_get_hsv();
           char buf[32];
           snprintf(buf, sizeof(buf), "HSV(%d, %d, %d)", hsv.h, hsv.s, hsv.v);
           send_string(buf);
