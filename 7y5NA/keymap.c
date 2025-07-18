@@ -273,7 +273,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case PRINT_RGB_COLOR:
       if (record->event.pressed) {
         // Only print if RGB lighting is enabled and in static mode
-        if (rgblight_is_enabled() && rgblight_get_mode() == RGBLIGHT_MODE_STATIC_LIGHT) {
+        if (rgblight_is_enabled() && rgblight_get_mode() == 1) {
           uint8_t h = rgblight_get_hue();
           uint8_t s = rgblight_get_sat();
           uint8_t v = rgblight_get_val();
