@@ -313,14 +313,14 @@ const key_override_t at_key_override =
 const key_override_t colon_key_override = 
     ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_SCLN);
 
-const key_override_t **key_overrides = (const key_override_t *[]){
-	&paren_key_override,
+const key_override_t *key_overrides[] = {
+    &paren_key_override,
   &brace_key_override,
   &slash_key_override,
   &hash_key_override,
   &at_key_override,
   &colon_key_override,
-	NULL
+    NULL
 };
 
 // Modifier LED indicator configuration
