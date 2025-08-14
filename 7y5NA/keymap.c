@@ -18,8 +18,8 @@ enum custom_keycodes {
 
 
 
-#define DUAL_FUNC_0 LT(10, KC_4)
-#define DUAL_FUNC_1 LT(10, KC_F5)
+#define DUAL_FUNC_0 LT(9, KC_S)
+#define DUAL_FUNC_1 LT(8, KC_2)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
@@ -76,7 +76,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
+
 extern rgb_config_t rgb_matrix_config;
+
+RGB hsv_to_rgb_with_value(HSV hsv) {
+  RGB rgb = hsv_to_rgb( hsv );
+  float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
+  return (RGB){ f * rgb.r, f * rgb.g, f * rgb.b };
+}
 
 void keyboard_post_init_user(void) {
   rgb_matrix_enable();
@@ -95,59 +102,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
 
     [5] = { {86,113,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {86,113,255}, {129,255,255}, {129,255,255}, {129,255,255}, {129,255,255}, {129,255,255}, {86,113,255}, {129,255,255}, {129,255,255}, {129,255,255}, {129,255,255}, {129,255,255}, {86,113,255}, {129,255,255}, {129,255,255}, {129,255,255}, {129,255,255}, {129,255,255}, {45,255,255}, {0,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {86,113,255}, {129,255,255}, {129,255,255}, {129,255,255}, {129,255,255}, {129,255,255}, {86,113,255}, {129,255,255}, {129,255,255}, {129,255,255}, {129,255,255}, {0,0,0}, {0,0,0}, {129,255,255}, {129,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {86,113,255}, {86,113,255}, {45,255,255} },
 
-    [6] = { 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,255,255}, //6  - winkey
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {86,255,255}, //25 - ctrl
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,240}, //37 - alt
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {0,0,0}, 
-      {172,255,255}, //50 - shift
-      {0,0,0} },
+    [6] = { {86,113,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {86,255,255}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,240}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {172,255,255}, {0,0,0} },
 
 };
 
@@ -164,9 +119,8 @@ void set_layer_color(int layer) {
     if (!hsv.h && !hsv.s && !hsv.v) {
         rgb_matrix_set_color( i, 0, 0, 0 );
     } else {
-        RGB rgb = hsv_to_rgb( hsv );
-        float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
-        rgb_matrix_set_color( i, f * rgb.r, f * rgb.g, f * rgb.b );
+        RGB rgb = hsv_to_rgb_with_value(hsv);
+        rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
     }
   }
 }
@@ -203,7 +157,7 @@ bool rgb_matrix_indicators_user(void) {
    default:
     if (rgb_matrix_get_flags() == LED_FLAG_NONE)
       rgb_matrix_set_color_all(0, 0, 0);
-    break;
+    }
   }
   
   // Apply modifier indicators on top of layer colors
@@ -264,15 +218,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case DUAL_FUNC_1:
       if (record->tap.count > 0) {
         if (record->event.pressed) {
-          register_code16(KC_ESCAPE);
+          layer_move(0);
         } else {
-          unregister_code16(KC_ESCAPE);
+          layer_move(0);
         }
       } else {
         if (record->event.pressed) {
-          layer_move(0);
+          register_code16(KC_ESCAPE);
         } else {
-          layer_move(0);
+          unregister_code16(KC_ESCAPE);
         }  
       }  
       return false;
