@@ -157,7 +157,7 @@ bool rgb_matrix_indicators_user(void) {
    default:
     if (rgb_matrix_get_flags() == LED_FLAG_NONE)
       rgb_matrix_set_color_all(0, 0, 0);
-    }
+    break;
   }
   
   // Apply modifier indicators on top of layer colors
