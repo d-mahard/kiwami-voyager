@@ -11,6 +11,7 @@ enum custom_keycodes {
   ST_MACRO_1,
   ST_MACRO_2,
   ST_MACRO_3,
+  CLEAR_MODS,
 };
 
 
@@ -22,7 +23,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO,          KC_NO,          KC_MINUS,       KC_LPRN,        KC_LCBR,        KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_SLASH,       KC_HASH,        KC_AT,          KC_NO,          KC_NO,
     KC_ESCAPE,      ST_MACRO_0,     KC_W,           KC_E,           KC_R,           KC_T,           KC_NO,                                          KC_NO,          KC_Y,           KC_U,           KC_I,           KC_O,           KC_COLN,        KC_ENTER,
     OSM(MOD_LGUI),  KC_Q,           KC_S,           KC_D,           KC_F,           KC_G,                                                                           KC_H,           KC_J,           KC_K,           KC_L,           KC_P,           OSM(MOD_LALT),
-    DUAL_FUNC_0,    KC_A,           KC_X,           KC_C,           KC_V,           KC_B,           KC_TRANSPARENT,                                 KC_NO,          KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_QUES,        OSL(3),
+    DUAL_FUNC_0,    KC_A,           KC_X,           KC_C,           KC_V,           KC_B,           QK_LOCK,                                        CLEAR_MODS,     KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_QUES,        OSL(3),
     MT(MOD_LALT, KC_DELETE),KC_Z,           KC_NO,          KC_NO,          KC_NO,                                                                                                          KC_NO,          KC_NO,          KC_NO,          KC_EXLM,        KC_BSPC,
                                                                                                     KC_NO,          KC_NO,          KC_NO,          KC_NO,
                                                                                                                     KC_NO,          KC_NO,
@@ -86,6 +87,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+    case CLEAR_MODS:
+      if (record->event.pressed) {
+        clear_mods();
+        clear_oneshot_mods();
+        clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
+        caps_word_off();
+        cancel_key_lock();
+      }
+      return false;
     case ST_MACRO_0:
     if (record->event.pressed) {
       SEND_STRING(SS_TAP(X_QUOTE)SS_DELAY(100)  SS_TAP(X_SPACE));
@@ -140,6 +150,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
+
+// Key overrides
+const key_override_t paren_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_LPRN, KC_RPRN);
+const key_override_t brace_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_LCBR, KC_RCBR);
+const key_override_t slash_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_SLASH, KC_BSLS);
+const key_override_t hash_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_HASH, KC_ASTR);
+const key_override_t at_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_AT, KC_PERC);
+const key_override_t colon_key_override = 
+    ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_SCLN);
+
+const key_override_t *key_overrides[] = {
+    &paren_key_override,
+    &brace_key_override,
+    &slash_key_override,
+    &hash_key_override,
+    &at_key_override,
+    &colon_key_override,
+    NULL
+};
 
 uint8_t layer_state_set_user(uint8_t state) {
     uint8_t layer = biton(state);
