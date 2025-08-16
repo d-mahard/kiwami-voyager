@@ -15,8 +15,8 @@ enum custom_keycodes {
 };
 
 
-#define DUAL_FUNC_0 LT(8, KC_F8)
-#define DUAL_FUNC_1 LT(14, KC_Q)
+#define DUAL_FUNC_0 LT(7, KC_M)
+#define DUAL_FUNC_1 LT(7, KC_C)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_ergodox_pretty(
@@ -135,15 +135,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case DUAL_FUNC_1:
       if (record->tap.count > 0) {
         if (record->event.pressed) {
-          register_code16(KC_ESCAPE);
+          layer_move(0);
         } else {
-          unregister_code16(KC_ESCAPE);
+          layer_move(0);
         }
       } else {
         if (record->event.pressed) {
-          layer_move(0);
+          register_code16(KC_ESCAPE);
         } else {
-          layer_move(0);
+          unregister_code16(KC_ESCAPE);
         }  
       }  
       return false;

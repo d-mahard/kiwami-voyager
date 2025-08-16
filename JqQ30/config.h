@@ -1,6 +1,6 @@
 #define PERMISSIVE_HOLD
 
 #define USB_SUSPEND_WAKEUP_DELAY 0
-#define SERIAL_NUMBER "JqQ30/7vV6oj"
+#define SERIAL_NUMBER "JqQ30/Ja4enm"
 #define LAYER_STATE_8BIT
 
