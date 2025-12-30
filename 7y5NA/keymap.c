@@ -264,8 +264,10 @@ const key_override_t hash_key_override =
     ko_make_basic(MOD_MASK_SHIFT, KC_HASH, KC_ASTR);
 const key_override_t at_key_override = 
     ko_make_basic(MOD_MASK_SHIFT, KC_AT, KC_PERC);
-const key_override_t colon_key_override = 
+const key_override_t colon_key_override =
     ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_SCLN);
+const key_override_t dollar_euro_override =
+    ko_make_basic(MOD_MASK_SHIFT, KC_DLR, RALT(KC_5));
 
 const key_override_t *key_overrides[] = {
     &paren_key_override,
@@ -274,6 +276,7 @@ const key_override_t *key_overrides[] = {
   &hash_key_override,
   &at_key_override,
   &colon_key_override,
+  &dollar_euro_override,
     NULL
 };
 
