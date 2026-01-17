@@ -14,8 +14,8 @@ enum custom_keycodes {
 };
 
 
-#define DUAL_FUNC_0 LT(6, KC_F23)
-#define DUAL_FUNC_1 LT(8, KC_F3)
+#define DUAL_FUNC_0 LT(3, KC_F1)
+#define DUAL_FUNC_1 LT(14, KC_F4)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_ergodox_pretty(
@@ -53,10 +53,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_BRIGHTNESS_UP,KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_INSERT,      DUAL_FUNC_1,                                    KC_PAUSE,       KC_APPLICATION, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_AUDIO_VOL_UP,
     KC_BRIGHTNESS_DOWN,KC_F5,          KC_F6,          KC_F7,          KC_F8,          KC_PSCR,                                                                        LED_LEVEL,      KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_AUDIO_VOL_DOWN,
     OSM(MOD_LALT),  KC_F9,          KC_F10,         KC_F11,         KC_F12,         LGUI(LSFT(KC_S)),QK_LLCK,                                        KC_TRANSPARENT, QK_BOOT,        EE_CLR,         QK_DYNAMIC_TAPPING_TERM_UP,QK_DYNAMIC_TAPPING_TERM_DOWN,QK_DYNAMIC_TAPPING_TERM_PRINT,KC_AUDIO_MUTE,
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_SYSTEM_SLEEP,                                                                                                KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
                                                                                                     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
                                                                                                                     KC_TRANSPARENT, KC_TRANSPARENT,
-                                                                                    KC_TRANSPARENT, KC_TRANSPARENT, KC_SYSTEM_SLEEP,KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+                                                                                    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [4] = LAYOUT_ergodox_pretty(
     KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT,
