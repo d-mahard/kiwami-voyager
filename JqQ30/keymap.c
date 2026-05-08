@@ -95,7 +95,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         clear_mods();
         clear_oneshot_mods();
         clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
-        caps_word_off();
         cancel_key_lock();
       }
       return false;

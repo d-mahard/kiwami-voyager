@@ -176,7 +176,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         clear_mods();
         clear_oneshot_mods();
         clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
-        caps_word_off();
       }
       return false;
     case ST_MACRO_0:
@@ -303,8 +302,7 @@ bool is_any_modifier_active(void) {
     
     // Check for any modifier bits (Shift, Ctrl, Alt, GUI) or CAPS WORD
     return (mods & (MOD_MASK_SHIFT | MOD_MASK_CTRL | MOD_MASK_ALT | MOD_MASK_GUI)) ||
-           (oneshot_mods & (MOD_MASK_SHIFT | MOD_MASK_CTRL | MOD_MASK_ALT | MOD_MASK_GUI)) ||
-           is_caps_word_on();
+           (oneshot_mods & (MOD_MASK_SHIFT | MOD_MASK_CTRL | MOD_MASK_ALT | MOD_MASK_GUI));
 }
 
 /**
@@ -334,7 +332,7 @@ void set_modifier_indicators(void) {
         rgb_matrix_set_color(LED_ALT_POS, MOD_INDICATOR_COLOR_R, MOD_INDICATOR_COLOR_G, MOD_INDICATOR_COLOR_B);
     }
     
-    if ((mods | oneshot_mods) & MOD_MASK_SHIFT || is_caps_word_on()) {
+    if ((mods | oneshot_mods) & MOD_MASK_SHIFT) {
         rgb_matrix_set_color(LED_SHIFT_POS, MOD_INDICATOR_COLOR_R, MOD_INDICATOR_COLOR_G, MOD_INDICATOR_COLOR_B);
     }
 }
