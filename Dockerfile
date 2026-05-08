@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     gcc-arm-none-eabi \
     libnewlib-arm-none-eabi \
-    avr-gcc \
+    gcc-avr \
     avr-libc \
     avrdude \
     dfu-util
