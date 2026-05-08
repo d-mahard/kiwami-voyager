@@ -23,11 +23,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO,          ST_MACRO_0,     KC_MINUS,       KC_LPRN,        KC_LCBR,        KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_SLASH,       KC_HASH,        KC_AT,          KC_COLN,        KC_NO,
     OSM(MOD_LGUI),  KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,           KC_ESCAPE,                                      KC_ENTER,       KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           OSM(MOD_LALT),
     DUAL_FUNC_0,    KC_A,           KC_S,           KC_D,           KC_F,           KC_G,                                                                           KC_H,           KC_J,           KC_K,           KC_L,           KC_QUES,        OSL(3),
-    MT(MOD_LALT, KC_DELETE),KC_Z,   KC_X,           KC_C,           KC_V,           KC_B,           QK_LOCK,                                        CLEAR_MODS,     KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_EXLM,        KC_BSPC,
+    MT(MOD_LALT, KC_DELETE),KC_Z,   KC_X,           KC_C,           KC_V,           KC_B,           KC_CAPS,                                        CLEAR_MODS,     KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_EXLM,        KC_BSPC,
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          OSL(2),                                                                                                         TT(1),          KC_NO,          KC_NO,          KC_NO,          KC_NO,
                                                                                                     KC_NO,          KC_NO,          KC_NO,          KC_NO,
                                                                                                                     KC_NO,          KC_NO,
-                                                                                    TT(4),          KC_LSFT,  OSM(MOD_LCTL),  OSM(MOD_RCTL),  OSM(MOD_RSFT),  KC_SPACE
+                                                                                    TT(4),          OSM(MOD_LSFT),  OSM(MOD_LCTL),  OSM(MOD_RCTL),  OSM(MOD_RSFT),  KC_SPACE
   ),
   [1] = LAYOUT_ergodox_pretty(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_7,           KC_8,           KC_9,           KC_KP_PLUS,     KC_TRANSPARENT,
@@ -95,7 +95,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         clear_mods();
         clear_oneshot_mods();
         clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
-        cancel_key_lock();
+        if (host_keyboard_led_state().caps_lock) {
+          tap_code(KC_CAPS);
+        }
       }
       return false;
     case ST_MACRO_0:
