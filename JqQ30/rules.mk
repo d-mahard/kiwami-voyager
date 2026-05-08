@@ -11,4 +11,4 @@ LTO_ENABLE = yes
 
 # Custom QMK here
 KEY_OVERRIDE_ENABLE = yes
-CAPS_WORD_ENABLE = yes
+
