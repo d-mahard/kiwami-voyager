@@ -2,6 +2,6 @@
 
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define HOLD_ON_OTHER_KEY_PRESS
-#define SERIAL_NUMBER "JqQ30/nlzM4b"
+#define SERIAL_NUMBER "JqQ30/galPb7"
 #define LAYER_STATE_16BIT
 
