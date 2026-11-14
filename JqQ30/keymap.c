@@ -15,9 +15,9 @@ enum custom_keycodes {
 };
 
 
-#define DUAL_FUNC_0 LT(6, KC_F1)
-#define DUAL_FUNC_1 LT(11, KC_8)
-#define DUAL_FUNC_2 LT(11, KC_F)
+#define DUAL_FUNC_0 LT(8, KC_F23)
+#define DUAL_FUNC_1 LT(12, KC_3)
+#define DUAL_FUNC_2 LT(5, KC_F3)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_ergodox_pretty(
